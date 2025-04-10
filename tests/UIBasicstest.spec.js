@@ -6,6 +6,7 @@ test('Browser Context Test', async ({ browser }) => {
   await page.goto('https://rahulshettyacademy.com/loginpagePractise/'); // Go to URL
 });
 
+
 test('Page Fixture Test', async ({ page }) => {
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/'); // Browser + page auto-created
   });
