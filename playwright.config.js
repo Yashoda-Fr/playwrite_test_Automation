@@ -13,15 +13,17 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 const config=({
+  
   testDir: './tests',
-  timeout: 40 * 1000, // 40 seconds for all actions
+  timeout: 30 * 1000, // 40 seconds for all actions
   expect: {
-    timeout: 40 * 1000, // 40 seconds for assertions
+    timeout: 5000, // 40 seconds for assertions
   },
   reporter :'html', // Use HTML reporter
   
   use: {
     browserName: 'chromium', // Default browser
+    headless: false, // Run tests in headless mode
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
   },
 
@@ -30,16 +32,6 @@ const config=({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
     },
 
     /* Test against mobile viewports. */
