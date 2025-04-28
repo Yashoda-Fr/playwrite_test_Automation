@@ -38,6 +38,7 @@ test.only('UI Controls', async ({ page }) => {
     
   const userName =page.locator("#username"); // Locator for username field
   const signIn = page.locator("#signInBtn"); // Locator for sign in button
+  const documentLink = page.locator("a[href*='documents-request']"); // Locator for document link
   const dropdown = page.locator("select.form-control"); // Locator for dropdown
   await dropdown.selectOption("consult"); // Select option from dropdown
   await page.locator(".radiotextsty").last().click(); // Click last radio button
@@ -49,5 +50,6 @@ test.only('UI Controls', async ({ page }) => {
   await page.locator("#terms").uncheck(); // Uncheck terms checkbox
   page.pause(); // Pause the test for manual inspection
   expect(await page.locator("#terms").isChecked()).toBeFalsy(); // Assert terms checkbox is unchecked
+  expect(documentLink).toHaveAttribute("class","blinkingText"); // Assert document link has class blinkingText
   
   }); 
