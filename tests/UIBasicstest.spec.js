@@ -42,5 +42,12 @@ test.only('UI Controls', async ({ page }) => {
   await dropdown.selectOption("consult"); // Select option from dropdown
   await page.locator(".radiotextsty").last().click(); // Click last radio button
   await page.locator("#okayBtn").click(); // Click OK button
-  await page.pause(); 
-  });
+  console.log(await page.locator(".radiotextsty").last().isChecked()); // Check if last radio button is checked
+  await expect(page.locator(".radiotextsty").last()).toBeChecked(); // Assert last radio button is attached
+  await page.locator("#terms").click(); // Click terms checkbox
+  await expect(page.locator("#terms")).toBeChecked();// Check if terms checkbox is checked
+  await page.locator("#terms").uncheck(); // Uncheck terms checkbox
+  page.pause(); // Pause the test for manual inspection
+  expect(await page.locator("#terms").isChecked()).toBeFalsy(); // Assert terms checkbox is unchecked
+  
+  }); 
