@@ -1,6 +1,6 @@
 const { test,expect } = require('@playwright/test');
 
-test.only('Browser Context Test', async ({ browser }) => {
+test('Browser Context Test', async ({ browser }) => {
 
   const context = await browser.newContext(); // Fresh browser instance
   const page = await context.newPage();       // New tab
@@ -25,15 +25,22 @@ test.only('Browser Context Test', async ({ browser }) => {
 
   console.log(await cardTitle.first().textContent()); 
   console.log(await cardTitle.nth(1).textContent()); 
-  
+
   const allTitles = await cardTitle.allTextContents();
   console.log(allTitles); // Print all card titles
 
 
 });
 
-test('Page Fixture Test', async ({ page }) => {
-    await page.goto('https://www.google.com/'); // Browser + page auto-created
-    console.log(await page.title()); // Print the title of the page
-    await expect(page).toHaveTitle('Google'); // Assert the URL
+test.only('UI Controls', async ({ page }) => {
+
+  await page.goto('https://rahulshettyacademy.com/loginpagePractise/'); // Go to URL
+    
+  const userName =page.locator("#username"); // Locator for username field
+  const signIn = page.locator("#signInBtn"); // Locator for sign in button
+  const dropdown = page.locator("select.form-control"); // Locator for dropdown
+  await dropdown.selectOption("consult"); // Select option from dropdown
+  await page.locator(".radiotextsty").last().click(); // Click last radio button
+  await page.locator("#okayBtn").click(); // Click OK button
+  await page.pause(); 
   });
