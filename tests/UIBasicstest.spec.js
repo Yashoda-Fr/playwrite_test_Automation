@@ -32,7 +32,7 @@ test('Browser Context Test', async ({ browser }) => {
 
 });
 
-test.only('UI Controls', async ({ page }) => {
+test('UI Controls', async ({ page }) => {
 
   await page.goto('https://rahulshettyacademy.com/loginpagePractise/'); // Go to URL
     
@@ -53,3 +53,22 @@ test.only('UI Controls', async ({ page }) => {
   expect(documentLink).toHaveAttribute("class","blinkingText"); // Assert document link has class blinkingText
   
   }); 
+
+  test.only('@Child window handle',async({browser})=>
+  {
+    const context =await browser.newContext(); // Fresh browser instance
+    const page = await context.newPage(); // New tab
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/'); // Go to URL
+    const documentLink = page.locator("[href*='documents-request']"); // Locator for document link
+
+    const [newPage] = await Promise.all(
+      [context.waitForEvent('page'), // Wait for new page to open
+      documentLink.click(),// Click document link
+    ])
+
+    const text = await newPage.locator(".red").textContent(); // Get text from new page
+    console.log(text); // Print text from new page
+    
+
+  }
+  );
