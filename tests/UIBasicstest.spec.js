@@ -58,6 +58,7 @@ test('UI Controls', async ({ page }) => {
   {
     const context =await browser.newContext(); // Fresh browser instance
     const page = await context.newPage(); // New tab
+    const userName =page.locator("#username"); // Locator for username field
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/'); // Go to URL
     const documentLink = page.locator("[href*='documents-request']"); // Locator for document link
 
@@ -67,7 +68,11 @@ test('UI Controls', async ({ page }) => {
     ])
 
     const text = await newPage.locator(".red").textContent(); // Get text from new page
-    console.log(text); // Print text from new page
+    const arrayText = text.split("@"); // Split text by '@'
+    const domain = arrayText[1].split(" ")[0]; // Get email from text
+    console.log(domain); // Print email
+    
+
     
 
   }
