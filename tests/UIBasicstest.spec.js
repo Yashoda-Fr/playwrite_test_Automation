@@ -71,7 +71,11 @@ test('UI Controls', async ({ page }) => {
     const arrayText = text.split("@"); // Split text by '@'
     const domain = arrayText[1].split(" ")[0]; // Get email from text
     console.log(domain); // Print email
-    
+    //console.log(text); // Print text from new page
+    //userName.fill(domain); // Type email in username field
+    await page.locator("#username").fill(domain); // Type email in username field
+    console.log(await page.locator("#username").textContent()); // Get text from username field
+
 
     
 
